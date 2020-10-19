@@ -1019,12 +1019,11 @@ const CATEGORIES = {
     _ADJECTIVE_,
     _ADVERB_,
     _PLURALNOUN_,
-    _VERB_
-
-//    _CONJUNCTION_,
+    _VERB_,
+    _CONJUNCTION_,
 //    _NOUN_,
-//    _PLACE_,
-//    _PRONOUN_,
+    _PLACE_,
+    // _PRONOUN_,
 };
 
 /**
@@ -1032,13 +1031,13 @@ const CATEGORIES = {
  * @const
  */
 const PATTERNS = [
-    '_ADJECTIVE__PLURALNOUN__VERB__ADVERB_'
+    '_ADJECTIVE__PLURALNOUN__VERB__ADVERB_',
 
     // BeautifulFungiOrSpaghetti
-    //    '_ADJECTIVE__PLURALNOUN__CONJUNCTION__PLURALNOUN_',
+    '_ADJECTIVE__PLURALNOUN__CONJUNCTION__PLURALNOUN_',
 
     // AmazinglyScaryToy
-    //    '_ADVERB__ADJECTIVE__NOUN_',
+    //_ADVERB__ADJECTIVE__NOUN_',
 
     // NeitherTrashNorRifle
     //    'Neither_NOUN_Nor_NOUN_',
@@ -1054,13 +1053,13 @@ const PATTERNS = [
     //    'The_ADVERB__ADJECTIVE__PLURALNOUN__VERB_',
 
     // WolvesComputeBadly
-    //    '_PLURALNOUN__VERB__ADVERB_',
+    '_PLURALNOUN__VERB__ADVERB_',
 
     // UniteFacilitateAndMerge
-    //    '_VERB__VERB_And_VERB_',
+    '_VERB__VERB_And_VERB_',
 
     // NastyWitchesAtThePub
-    //    '_ADJECTIVE__PLURALNOUN_AtThe_PLACE_',
+    '_ADJECTIVE__PLURALNOUN_AtThe_PLACE_'
 ];
 
 const randomElement = (array) => array[Math.floor(Math.random() * array.length)];
@@ -1071,12 +1070,12 @@ const randomElement = (array) => array[Math.floor(Math.random() * array.length)]
  *
  * @returns {string} A newly-generated room name.
  */
-function generateRoomWithoutSeparator() {
+function generateRoomWithoutSeparator(cat) {
     // XXX Note that if more than one pattern is available, the choice of 'name'
     // won't have a uniform distribution amongst all patterns (names from
     // patterns with fewer options will have higher probability of being chosen
     // that names from patterns with more options).
-    let name = randomElement(PATTERNS);
+    let name = PATTERNS[cat] || randomElement(PATTERNS);
 
     while (_hasTemplate(name)) {
         for (const template in CATEGORIES) { // eslint-disable-line guard-for-in
